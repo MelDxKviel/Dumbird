@@ -5,7 +5,7 @@ public class Bullet : MonoBehaviour
     private float _bulletSpeed;
     public Rigidbody2D rb;
 
-    public Vector2 bulletDirection;
+    public Vector2 direction;
 
     void Start()
     {
@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        rb.transform.position += new Vector3(bulletDirection.x * _bulletSpeed * Time.deltaTime, 0);
+        rb.transform.position += new Vector3(direction.x * _bulletSpeed * Time.deltaTime, 0);
     }
     
     void OnTriggerEnter2D(Collider2D other)

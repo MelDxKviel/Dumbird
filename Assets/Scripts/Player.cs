@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 
@@ -11,6 +12,7 @@ public class Player : MonoBehaviour
     public float fireRate;
     private GameOver gameOverManager;
     private bool _shootCooldown;
+    private bool _machineGunBuff;
 
 
     void Start()
@@ -23,9 +25,13 @@ public class Player : MonoBehaviour
     {
         float directionY = joystick.Vertical;
         playerDirection = new Vector2(0, directionY).normalized;
+        if (_machineGunBuff)
+        {
+            Shoot();
+        }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         rb.velocity = new Vector2(0, playerDirection.y * playerSpeed);
     }
@@ -37,22 +43,62 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
             gameOverManager.OnGameOver();
         }
+        
+        if (col.gameObject.CompareTag("Coin"))
+        {
+            FindObjectOfType<Score>().IncreaseScore(3);
+            Destroy(col.gameObject);
+        }
+        
+        if (col.gameObject.CompareTag("Buff"))
+        {
+            var buffType = col.gameObject.GetComponent<Buff>().buffType;
+            if (buffType == Buff.BuffType.MachineGun)
+            {
+                _machineGunBuff = true; 
+                fireRate = 0.1f;
+                
+            }
+            if (buffType == Buff.BuffType.SizeReducing)
+            {
+                var size = transform.localScale * 0.5f;
+                gameObject.transform.localScale = size;
+            }
+            StartCoroutine(ResetBuff(buffType));
+            Destroy(col.gameObject);
+        }
     }
 
     public void Shoot()
     {
-        if (!_shootCooldown)
-        {
-            Vector3 position = transform.position;
-            position.x += 1;
-            Instantiate(bullet, position, Quaternion.identity);
-            _shootCooldown = true;
-            Invoke(nameof(ResetShootCooldown), fireRate);
-        }
+        if (_shootCooldown) return;
+        
+        var position = transform.position;
+        position.x += 1;
+        Instantiate(bullet, position, Quaternion.identity);
+        _shootCooldown = true;
+        Invoke(nameof(ResetShootCooldown), fireRate);
     }
     
     public void ResetShootCooldown()
     {
         _shootCooldown = false;
     }
+    
+    IEnumerator ResetBuff(Buff.BuffType buffType)
+    {
+        yield return new WaitForSeconds(10);
+        if (buffType == Buff.BuffType.MachineGun)
+        {
+            _machineGunBuff = false;
+            fireRate = 0.5f;
+        }
+        if (buffType == Buff.BuffType.SizeReducing)
+        {
+            var size = transform.localScale * 2f;
+            gameObject.transform.localScale = size;
+        }
+    }
+
+    
 }

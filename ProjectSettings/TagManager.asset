@@ -7,6 +7,8 @@ TagManager:
   - Border
   - Enemy
   - Bullet
+  - Coin
+  - Buff
   layers:
   - Default
   - TransparentFX

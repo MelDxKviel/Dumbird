@@ -13,29 +13,32 @@ public class GameOver : MonoBehaviour
     {
         Time.timeScale = 0f;
         spawnEnemies.DisableSpawning();
-        DestroyAllEnemies();
-        DestroyAllBullets();
+        DestroyAllGameObjects();
         inGameControls.SetActive(false);
         gameOverMenu.SetActive(true);
         score.gameObject.SetActive(false);
         finalScore.text = $"Your score: {score.text}";
     }
     
-    void DestroyAllEnemies()
+    
+    void DestroyAllGameObjects()
     {
         GameObject[] existingEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in existingEnemies)
         {
             Destroy(enemy);
         }
-    }
-    
-    void DestroyAllBullets()
-    {
-        GameObject[] existingEnemies = GameObject.FindGameObjectsWithTag("Bullet");
-        foreach (GameObject bullet in existingEnemies)
+        
+        GameObject[] existingBullets = GameObject.FindGameObjectsWithTag("Bullet");
+        foreach (GameObject bullet in existingBullets)
         {
             Destroy(bullet);
+        }
+        
+        GameObject[] existingBuffs = GameObject.FindGameObjectsWithTag("Buff");
+        foreach (GameObject buff in existingBuffs)
+        {
+            Destroy(buff);
         }
     }
 }

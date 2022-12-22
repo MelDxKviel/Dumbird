@@ -437,7 +437,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a67b58d6cddcd4345b1e001340de5a76, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4eab7416e23bf84d1b2d75f10c267fb4, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -566,7 +566,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   playerDirection: {x: 0, y: 0}
   joystick: {fileID: 105035250}
-  fireRate: 0.5
+  fireRate: 1
 --- !u!50 &285313829
 Rigidbody2D:
   serializedVersion: 4
@@ -588,8 +588,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &285313830
-BoxCollider2D:
+--- !u!58 &285313833
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -601,19 +601,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.077386856, y: -0.1547749}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 8, y: 6.26}
-    newSize: {x: 8, y: 6.26}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0.16931438, y: -0.21164227}
   serializedVersion: 2
-  m_Size: {x: 4.563999, y: 3.7836027}
-  m_EdgeRadius: 0
+  m_Radius: 1.7989197
 --- !u!1 &351023998
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,7 +616,7 @@ GameObject:
   - component: {fileID: 351024000}
   m_Layer: 0
   m_Name: Top border
-  m_TagString: Border
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -946,9 +936,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f5033db1b6a01b0acd93854c9b2a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSpeed: 15
+  cameraSpeed: 10
   speedUp: 2.5
-  timeBetweenSpeedUp: 15
+  timeBetweenSpeedUp: 30
 --- !u!4 &671182869
 Transform:
   m_ObjectHideFlags: 0
@@ -1388,7 +1378,7 @@ GameObject:
   - component: {fileID: 975931122}
   m_Layer: 0
   m_Name: Bot border
-  m_TagString: Border
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1479,11 +1469,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 319.17993
+      value: 417.25
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 319.18
+      value: 417.25
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1515,11 +1505,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 196
+      value: 184
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 230
+      value: 281
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2342,7 +2332,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7322479139939081351, guid: a23feaf1d7a3acb449af59db52c27e97, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7322479139939081351, guid: a23feaf1d7a3acb449af59db52c27e97, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2623,6 +2613,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2131840771}
   - component: {fileID: 2131840770}
+  - component: {fileID: 2131840772}
+  - component: {fileID: 2131840773}
   m_Layer: 0
   m_Name: Spawn Point
   m_TagString: Untagged
@@ -2670,3 +2662,45 @@ Transform:
   m_Father: {fileID: 671182869}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2131840772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131840769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffe8f01378bbd8946bf5d36a1755789d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coin: {fileID: 4116412719370977042, guid: d754fbff08371c84b83ee5a668e07f48, type: 3}
+  maxX: 3.5
+  minX: 3
+  maxY: 4
+  minY: -4
+  timeBetweenSpawnsMin: 5
+  timeBetweenSpawnsMax: 10
+  spawnDelay: 8
+--- !u!114 &2131840773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2131840769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e5e6f5865cdfdca7bd04e433cb60a0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffs:
+  - {fileID: 3781779632453951532, guid: 2226670cd7dd951f695db7cff2b225ea, type: 3}
+  - {fileID: 895852601781316693, guid: f3ddc3f28e1b2f4b8a0122bbe2a4f8b2, type: 3}
+  maxX: 3.5
+  minX: 3
+  maxY: 1.5
+  minY: -3
+  timeBetweenSpawnsMin: 20
+  timeBetweenSpawnsMax: 40
+  spawnDelay: 15
