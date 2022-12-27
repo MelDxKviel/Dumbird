@@ -4,21 +4,31 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [Header("Player move settings")]
     public float playerSpeed;
-    [SerializeField] private GameObject bullet;
     public Rigidbody2D rb;
     public Vector2 playerDirection;
     public Joystick joystick;
+    
+    [Header("Player shoot settings")]
     public float fireRate;
-    private GameOver gameOverManager;
+    [SerializeField] private GameObject bullet;
+    
+    [Space(10)]
+    [SerializeField] private GameObject bubble;
+    [SerializeField] private AudioClip deathSound;
+    
+    private GameOver _gameOverManager;
     private bool _shootCooldown;
     private bool _machineGunBuff;
+    private bool _invulnerable;
+    
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        gameOverManager = GameObject.Find("Game Manager").GetComponent<GameOver>();
+        _gameOverManager = GameObject.Find("Game Manager").GetComponent<GameOver>();
     }
     
     void Update()
@@ -38,10 +48,12 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag("Enemy"))
+        if (col.gameObject.CompareTag("Enemy") && !_invulnerable)
         {
             Destroy(gameObject);
-            gameOverManager.OnGameOver();
+            AudioSource.PlayClipAtPoint(deathSound, transform.position);
+            Destroy(GameObject.FindWithTag("Audio"));
+            _gameOverManager.OnGameOver();
         }
         
         if (col.gameObject.CompareTag("Coin"))
@@ -52,20 +64,29 @@ public class Player : MonoBehaviour
         
         if (col.gameObject.CompareTag("Buff"))
         {
-            var buffType = col.gameObject.GetComponent<Buff>().buffType;
-            if (buffType == Buff.BuffType.MachineGun)
+            var buff = col.gameObject.GetComponent<Buff>();
+            if (buff.buffType == Buff.BuffType.MachineGun)
             {
                 _machineGunBuff = true; 
                 fireRate = 0.1f;
-                
             }
-            if (buffType == Buff.BuffType.SizeReducing)
+            if (buff.buffType == Buff.BuffType.SizeReducing)
             {
                 var size = transform.localScale * 0.5f;
                 gameObject.transform.localScale = size;
             }
-            StartCoroutine(ResetBuff(buffType));
+            if (buff.buffType == Buff.BuffType.Invulnerability)
+            {
+                bubble.SetActive(true);
+                _invulnerable = true;
+            }
+            StartCoroutine(ResetBuff(buff.buffType));
             Destroy(col.gameObject);
+            
+            if (buff.buffSound)
+            {
+                AudioSource.PlayClipAtPoint(buff.buffSound, transform.position);
+            }
         }
     }
 
@@ -74,7 +95,7 @@ public class Player : MonoBehaviour
         if (_shootCooldown) return;
         
         var position = transform.position;
-        position.x += 1;
+        position.x += gameObject.transform.localScale.x;
         Instantiate(bullet, position, Quaternion.identity);
         _shootCooldown = true;
         Invoke(nameof(ResetShootCooldown), fireRate);
@@ -97,6 +118,11 @@ public class Player : MonoBehaviour
         {
             var size = transform.localScale * 2f;
             gameObject.transform.localScale = size;
+        }
+        if (buffType == Buff.BuffType.Invulnerability)
+        {
+            _invulnerable = false;
+            bubble.SetActive(false);
         }
     }
 

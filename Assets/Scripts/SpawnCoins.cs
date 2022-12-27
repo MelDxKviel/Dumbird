@@ -5,14 +5,18 @@ public class SpawnCoins : MonoBehaviour
 {
     public GameObject coin;
 
+    [Header("Spawn position settings")]
     public float maxX;
     public float minX;
     public float maxY;
     public float minY;
+    
+    [Header("Spawn time settings")]
     public float timeBetweenSpawnsMin;
     public float timeBetweenSpawnsMax;
-    private float _timeToSpawn;
     public float spawnDelay;
+    
+    private float _timeToSpawn;
     
     void Update()
     {

@@ -11,7 +11,9 @@ public class Buff : MonoBehaviour
     
     public BuffType buffType;
     public Rigidbody2D rb;
+    public AudioClip buffSound;
     public float amp;
+    
     private float _speed;
     private float _t;
     private float _offset;

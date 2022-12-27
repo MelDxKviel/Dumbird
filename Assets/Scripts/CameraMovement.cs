@@ -23,4 +23,5 @@ public class CameraMovement : MonoBehaviour
     {
         _timeToSpeedUp = timeBetweenSpeedUp;
     }
+
 }

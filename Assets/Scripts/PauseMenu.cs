@@ -2,9 +2,11 @@ using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
-    public bool gameIsPaused = false;
+    
     public GameObject pauseMenuUI;
     public GameObject inGameControls;
+    
+    public bool gameIsPaused = false;
     
     public void Pause()
     {

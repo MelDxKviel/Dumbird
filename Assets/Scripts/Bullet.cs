@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float _bulletSpeed;
     public Rigidbody2D rb;
-
     public Vector2 direction;
-
+    
+    private float _bulletSpeed;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        rb.transform.position += new Vector3(direction.x * _bulletSpeed * Time.deltaTime, 0);
+        rb.transform.position += new Vector3(direction.x * _bulletSpeed * Time.deltaTime, direction.y * Time.deltaTime, 0);
     }
     
     void OnTriggerEnter2D(Collider2D other)

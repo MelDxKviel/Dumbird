@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         hp -= damage;
+        GetComponent<Renderer>().material.color = Color.Lerp(Color.red, Color.white, hp / 100);
         if (hp <= 0)
         {
             Destroy(gameObject);

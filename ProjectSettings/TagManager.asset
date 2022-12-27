@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - Coin
   - Buff
+  - Audio
   layers:
   - Default
   - TransparentFX
@@ -43,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: front
+    uniqueID: 1380141501
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

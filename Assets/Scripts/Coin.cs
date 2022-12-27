@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    private float _coinSpeed;
     public Rigidbody2D rb;
-
     public Vector2 bulletDirection;
+    
+    private float _coinSpeed;
 
     void Start()
     {

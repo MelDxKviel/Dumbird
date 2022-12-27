@@ -1,21 +1,27 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class SpawnEnemies : MonoBehaviour
 {
+    [Header("Enemy prefabs")]
     public List<GameObject> enemies;
+    public GameObject boss;
+    public int countToAddBoss;
 
+    [Header("Spawn position settings")]
     public float maxX;
     public float minX;
     public float maxY;
     public float minY;
+    
+    [Header("Spawn time settings")]
     public float timeBetweenSpawns;
-    private float _timeToSpawn;
     public float spawnDelay;
-
+    
+    private float _timeToSpawn;
+    private int _spawnedEnemiesCount;
+    private bool _bossSpawned;
     private bool _isSpawning = true;
 
     void Update()
@@ -24,7 +30,13 @@ public class SpawnEnemies : MonoBehaviour
         if (Time.time >= _timeToSpawn && _isSpawning)
         {
             Spawn();
+            _spawnedEnemiesCount++;
             _timeToSpawn = Time.time + timeBetweenSpawns;
+        }
+        if (_spawnedEnemiesCount == countToAddBoss && !_bossSpawned)
+        {
+            enemies.Add(boss);
+            _bossSpawned = true;
         }
     }
     
