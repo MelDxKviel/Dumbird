@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a1948f500b665239b09635dadfc29e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffType: 0
+  buffType: 1
   rb: {fileID: 0}
-  buffSound: {fileID: 0}
+  buffSound: {fileID: 8300000, guid: 8042c83d9891737078e34a800c1ac949, type: 3}
   amp: 0.05
 --- !u!61 &4910358301737807793
 BoxCollider2D:
